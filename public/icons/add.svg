@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="width:0;height:0;position:absolute;overflow:hidden;">
+  <defs>
+<symbol xmlns="http://www.w3.org/2000/svg" id="si-ant-plus" aria-labelledby="fdsi-ant-plus-title" viewBox="0 0 1024 1024">
+  <title id="fdsi-ant-plus-title">icon plus</title>
+  <path d="M 990 448 H 544 V 34 q 0 -14 -9.5 -24 T 512 0 t -22.5 10 t -9.5 24 v 414 H 34 q -14 0 -24 9.5 T 0 480 t 10 22.5 t 24 9.5 h 446 v 478 q 0 14 9.5 24 t 22.5 10 t 22.5 -10 t 9.5 -24 V 512 h 446 q 14 0 24 -9.5 t 10 -22.5 t -10 -22.5 t -24 -9.5 Z" /></symbol>
+  </defs>
+</svg>

@@ -1,0 +1,196 @@
+<header>
+    <form method="POST" action="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group input-group-lg">
+                    <input type="text" name="description" class="form-control" placeholder="Write Something ... " id="item" autocomplete="off"
+                        data-emojiable="true" required>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-dark btn-lg">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</header>
+<div class="content">
+    <!-- show any messages that come back with authentication -->
+    {{#if error }}
+    <div class="alert alert-warning" role="alert">
+        {{error}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {{/if}} {{#if success }}
+    <div class="alert alert-success" role="alert">
+        {{success}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {{/if}}
+    <!--undone task-->
+    {{#if pendingTodos }}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="bg-primary" style="color:aliceblue;">
+                    <tr>
+                        <th colspan="2">
+                            <h4>Pending Tasks</h4>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each pendingTodos }}
+                    <tr class="justify-content-between">
+                        <td class="text-justify">
+                            <h5>{{this.description}}</h5>
+                            <p class="small text-muted">
+                                <span class="pull-right">
+                                    {{dateFormat this.createdAt "dddd, MMMM Do YYYY, h:mm:ss a"}}
+                                </span>
+                            </p>
+                        </td>
+                        <td class="text-right" width="150">
+                            <button class="btn btn-outline-dark" title="Send By Email" onclick="sendByEmail('{{this.description}}')">
+                                <i class="fa fa-envelope"></i>
+                            </button>
+                            <button class="btn btn-outline-success" title="Mark As Complete" onclick="completeItem({{this.id}})">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button class="btn btn-outline-danger" title="Delete" onclick="deleteItem({{this.id}})">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr/> {{/if}}
+    <!--completed task-->
+    {{#if completeTodos }}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="bg-success" style="color:aliceblue;">
+                    <tr>
+                        <th colspan="2">
+                            <h4>Completed Tasks</h4>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each completeTodos }}
+                    <tr class="justify-content-between">
+                        <td class="text-justify">
+                            <h5>{{this.description}}</h5>
+                            <p class="small text-muted">
+                                <span class="pull-right">
+                                    {{dateFormat this.createdAt "dddd, MMMM Do YYYY, h:mm:ss a"}}
+                                </span>
+                            </p>
+                        </td>
+                        <td class="text-right" width="150">
+                            <button class="btn btn-outline-dark" title="Send By Email" onclick="sendByEmail('{{this.description}}')">
+                                <i class="fa fa-envelope"></i>
+                            </button>
+                            <button class="btn btn-outline-danger" title="Delete" onclick="deleteItem({{this.id}})">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
+<script>
+    function sendByEmail(description) {
+        console.log(description);
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var receiver = prompt('Please enter receiver email:', '');
+        var sender = prompt('Please enter sender email (hotmail account):', '');
+        var pass = prompt('Please enter password for hotmail account:', '');
+
+        if (sender === null || receiver === null) {
+            return alert('No email was entered');
+        }
+        if (mailformat.test(receiver) && mailformat.test(sender)) {
+            $.ajax('/todos/sendbyemail', {
+                method: 'POST',
+                type: 'JSON',
+                data: {
+                    sender: sender,
+                    password: password,
+                    receiver: receiver,
+                    message: description
+                },
+                success: (res) => {
+                    console.log(res);
+                    //alert(res);
+                    location.reload();
+                },
+                error: (err) => {
+                    console.error(err);
+                    //alert(err);
+                }
+            });
+        } else {
+            return alert('Invalid email address entered!');
+        }
+    }
+
+    function deleteItem(id) {
+        console.log(id);
+        var result = confirm('You are about to delete this task. \nChanges cannot be reversed. \nAre you sure?');
+        if (result) {
+            $.ajax('/todos/' + id, {
+                method: 'DELETE',
+                type: 'JSON',
+                success: (res) => {
+                    console.log(res);
+                    //alert(res);
+                    location.reload();
+                },
+                error: (err) => {
+                    console.error(err);
+                    //alert(err);
+                }
+            })
+        } else {
+            return;
+        }
+    }
+
+    function completeItem(id) {
+        console.log(id);
+        var result = confirm('You are about to mark this task as completed. \nAre you sure?');
+        if (result) {
+            $.ajax('/todos/complete/' + id, {
+                method: 'PUT',
+                type: 'JSON',
+                success: (res) => {
+                    console.log(res);
+                    //alert(res);
+                    location.reload();
+                },
+                error: (err) => {
+                    console.error(err);
+                    // alert(err);
+                }
+            })
+        } else {
+            return;
+        }
+    }
+</script>

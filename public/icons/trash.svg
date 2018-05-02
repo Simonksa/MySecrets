@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="width:0;height:0;position:absolute;overflow:hidden;">
+  <defs>
+<symbol xmlns="http://www.w3.org/2000/svg" id="si-ant-delete" aria-labelledby="chsi-ant-delete-title" viewBox="0 0 896 1024"><title id="chsi-ant-delete-title">icon delete</title><path d="M 864 191 H 705 V 73 q 0 -30 -21.5 -51.5 T 632 0 H 264 q -30 0 -51.5 21.5 T 191 73 v 118 H 32 q -13 0 -22.5 9.5 T 0 224 q 0 13 9.5 22.5 T 32 256 h 33 v 695 q 0 30 21.5 51.5 T 138 1024 h 619 q 30 0 51.5 -21.5 T 830 951 V 256 h 33 q 14 0 23.5 -9.5 T 896 224 q 0 -14 -9.5 -23.5 T 864 191 Z m -609 0 V 73 q 0 -9 9 -9 h 368 q 9 0 9 9 v 119 H 255 v -1 Z m 511 760 q 0 9 -9 9 H 138 q -9 0 -9 -9 V 256 h 637 v 695 Z M 256 416 v 384 q 0 14 -9.5 23 t -22.5 9 t -22.5 -9 t -9.5 -23 V 416 q 0 -13 9.5 -22.5 T 224 384 t 22.5 9.5 T 256 416 Z m 224 0 v 384 q 0 14 -9.5 23 t -22.5 9 t -22.5 -9 t -9.5 -23 V 416 q 0 -13 9.5 -22.5 T 448 384 t 22.5 9.5 T 480 416 Z m 225 0 v 384 q 0 14 -9.5 23 t -22.5 9 t -22.5 -9 t -9.5 -23 V 416 q 0 -13 9.5 -22.5 T 673 384 t 22.5 9.5 T 705 416 Z" /></symbol>
+  </defs>
+</svg>

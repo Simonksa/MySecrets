@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>MySecrets - {{title}}</title>
+  <!--Rooto Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700 " rel="stylesheet ">
+  <!--stylesheet-->
+  <link href="/css/bootstrap.min.css" rel="stylesheet ">
+  <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet ">
+  <link href="/lib/css/emoji.css" rel="stylesheet">
+  <link rel='stylesheet' href='/css/style.css' />
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" style="height: 75px;">
+    <div class="container">
+      <a class="navbar-brand" href="/">MySecrets</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          {{#if user }}
+          <li class="nav-item active">
+            <a class="nav-link" href="/todos">Todos
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {{/if}}
+        </ul>
+        {{#if user }}
+        <ul class="nav navbar-nav navbar-right" id="navbarRight">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <img src="/images/{{user.avatar}}" class="img-rounded img-fluid" width="35" height="35">&nbsp;
+              <span>{{user.username}}</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/profile">Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/logout">
+                <span class="fa fa-signout"></span> Logout</a>
+            </div>
+          </li>
+        </ul>
+        {{else}}
+        <ul class="nav navbar-nav navbar-right" id="navbarRight">
+          <li class="nav-item">
+            <a class="btn btn-outline-warning" href="/login">
+              <span class="fa fa-unlock"></span> Login
+            </a>
+          </li>
+          &nbsp;
+          <li class="nav-item">
+            <a href="/register" class="btn btn-outline-success">
+              <span class="fa fa-user"></span> Register
+            </a>
+          </li>
+        </ul>
+        {{/if}}
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {{{body}}}
+  </div>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="lib/js/config.js"></script>
+  <script src="/lib/js/util.js"></script>
+  <script src="/lib/js/jquery.emojiarea.js"></script>
+  <script src="/lib/js/emoji-picker.js"></script>
+  <script>
+    $(function () {
+      // Initializes and creates emoji set from sprite sheet
+      window.emojiPicker = new EmojiPicker({
+        emojiable_selector: '[data-emojiable=true]',
+        assetsPath: '../lib/img/',
+        popupButtonClasses: 'fa fa-smile-o'
+      });
+      // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+      // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+      // It can be called as many times as necessary; previously converted input fields will not be converted again
+      window.emojiPicker.discover();
+    });
+  </script>
+</body>
+
+</html>
